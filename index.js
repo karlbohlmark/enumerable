@@ -25,7 +25,7 @@ module.exports = Enumerable;
 function mixin(obj){
   for (var key in proto) obj[key] = proto[key];
   obj.__iterate__ = obj.__iterate__ || defaultIterator;
-  obj.__construct__ = obj.__construct__ || Enumerable;
+  
   return obj;
 }
 
@@ -84,19 +84,6 @@ Enumerable.prototype.__iterate__ = function(){
 };
 
 /**
- * Construct new enumerable.
- *
- * @return {Enumerable}
- * @api private
- */
-
-Enumerable.prototype.__construct__ = function(items){
-  var obj = this.obj;
-  obj.__construct__ = obj.__construct__ || Enumerable;
-  return obj.__construct__(items);
-};
-
-/**
  * Iterate each value and invoke `fn(val, i)`.
  *
  *    users.each(function(val, i){
@@ -144,7 +131,7 @@ proto.map = function(fn){
   for (var i = 0; i < len; ++i) {
     arr.push(fn(vals.get(i), i));
   }
-  return this.__construct__(arr);
+  return new this.constructor(arr);
 };
 
 /**
@@ -174,7 +161,7 @@ proto.select = function(fn){
     val = vals.get(i);
     if (fn(val, i)) arr.push(val);
   }
-  return this.__construct__(arr)
+  return new this.construct(arr)
 };
 
 /**
@@ -196,7 +183,7 @@ proto.unique = function(){
     if (~arr.indexOf(val)) continue;
     arr.push(val);
   }
-  return this.__construct__(arr);
+  return new this.constructor(arr);
 };
 
 /**
@@ -242,7 +229,7 @@ proto.reject = function(fn){
     }
   }
 
-  return this.__construct__(arr);
+  return new this.constructor(arr);
 };
 
 /**
