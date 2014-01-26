@@ -161,7 +161,7 @@ proto.select = function(fn){
     val = vals.get(i);
     if (fn(val, i)) arr.push(val);
   }
-  return new this.construct(arr)
+  return new this.constructor(arr)
 };
 
 /**
