@@ -1,5 +1,5 @@
 {
-  "name": "enumerable-component",
+  "name": "@karboh/enumerable-component",
   "version": "0.3.1",
   "dependencies": {
     "to-function": "1.2.0"
